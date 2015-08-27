@@ -1,0 +1,12 @@
+body { /* General Body Layout */
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align:center;
+	padding: 10px;
+}
+
+title.design_border {
+	border-style: double;
+	padding: 2px;
+	border-width: 3px;
+}
