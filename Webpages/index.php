@@ -1,5 +1,12 @@
 
 <?php 
-	include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
-	$RENDENGINE->standardRender('<p2> Hi  Welcome to Kitsunemimi land </p2>');
+	include("../include.php");
+
+
+
+
+	//$RENDENGINE->standardRenderFile(["Test/StandardWelcomeTest","Test/TestingStandardRender"]);
+	$RENDENGINE->standardLayeredRender(["f" => "Test/StandardWelcomeTest","t" => "mimi"]);
+
+
 ?>

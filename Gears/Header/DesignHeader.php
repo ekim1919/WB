@@ -1,5 +1,4 @@
-<?php
-	echo '
+
 	<!DOCTYPE html>
 		<html>
 		<body>
@@ -12,5 +11,7 @@
 			<design class="design_border">
 				A Databank for your Waifus
 			</design>
-			</p>';
-?>
+			</p>
+
+			<a href="/Webpages/register.php"> Register </a> 
+			<a href="/Webpages/login.php"> Login </a> <br>
