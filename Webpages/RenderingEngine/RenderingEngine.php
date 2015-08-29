@@ -1,4 +1,6 @@
 <?php
+	
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/Base/baseexception.php");
 
 	class RenderingEngine {
 
@@ -46,6 +48,12 @@
 			}
 
 			echo  $this->render("Header/DesignHeader") . ob_get_clean() . $this->render("Footer/DesignFooter");
+		}
+
+
+		//Directly dumps text to page.
+		public function dumpErrorMessage($dump) {
+			echo $dump;
 		}
 	}
 ?>
