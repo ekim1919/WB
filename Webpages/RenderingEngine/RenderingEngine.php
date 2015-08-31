@@ -2,6 +2,13 @@
 	
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Base/baseexception.php");
 
+	class RenderException extends BaseException {
+
+		public function renderableMessage() {
+			return "An Exception in the Rendering Engine was caught: " . $this->message;
+		}
+	}
+
 	class RenderingEngine {
 
 		//Render the webpage with the header and footer given by $header_file_path and $footer_file_path
@@ -44,7 +51,7 @@
 			foreach($array as $key => $value) {
 				if($key == "f") echo $this->render($value);
 				elseif($key == "t") echo $value;
-				else exit(); //EXCEPTION NEEDED HERE. REMEMBER TO REMOVE THE OUTPUT BUFFER AS WELL.
+				else throw new RenderException("Cannot render a layered value"); 
 			}
 
 			echo  $this->render("Header/DesignHeader") . ob_get_clean() . $this->render("Footer/DesignFooter");
@@ -52,8 +59,8 @@
 
 
 		//Directly dumps text to page.
-		public function dumpErrorMessage($dump) {
-			echo $dump;
+		public function renderText($text) {
+			echo $text;
 		}
 	}
 ?>

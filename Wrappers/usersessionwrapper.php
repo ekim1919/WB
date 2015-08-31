@@ -10,14 +10,20 @@ class UserSessionWrapper {
 	*/
 
 	public function __construct() {
-		session_start(); 		
+		if(!isset($_SESSION)) {
+			session_start();			
+		}
 	}
 
 	public function isLoggedIn() {
 		return isset($_SESSION["loggedInBool"]);
+	}
+
+	public function logIn() {
+		$_SESSION["loggedInBool"] = True;
 	} 
 
-
+	
 
 }
 

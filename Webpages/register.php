@@ -1,6 +1,6 @@
 <?php
-	include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
+	require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-	$RENDENGINE->standardRenderFile('User/register'); //Bring in Register HTML from Gears
+	$RENDENGINE->standardRenderFile(['Behavior/Registration/registerbehav','User/register']); //Bring in Register HTML from Gears
 
 ?>

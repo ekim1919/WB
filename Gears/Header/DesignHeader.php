@@ -2,7 +2,7 @@
 	<!DOCTYPE html>
 		<html>
 		<body>
-			<link rel="stylesheet" type="text/css" href="css/title.css">
+			<link rel="stylesheet" type="text/css" href="/Webpages/css/title.css">
 			<h1> 
 				Waifu Battle
 			</h1>
