@@ -13,5 +13,15 @@
 			</design>
 			</p>
 
-			<a href="/Webpages/register.php"> Register </a> 
-			<a href="/Webpages/login.php"> Login </a> <br>
+			<?php
+
+			include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
+
+			if (!$USERSESS->isloggedin()) {
+				echo '<a href="/Webpages/Auth/register.php"> Register </a>'; 
+				echo '<a href="/Webpages/Auth/login.php"> Login </a> <br>';
+			} else {
+				echo "Welcome " . $USERSESS->getUserName();
+			}
+
+			?>

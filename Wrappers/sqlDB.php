@@ -89,21 +89,21 @@
 											   $this->params);
 			if(!($this->sqlResult)) {
 				unset($this->sqlResult);
-				throw new DBException("Result in pg_query lead to an error");	
+				throw new DBException("Result in a query lead to an error.");	
 			}
 			
 		}
 
 		public function getRow($row_number=NULL) {
-			return (isset($sqlResult)) ? pg_fetch_array($sqlResult,$row_number) : NULL;
+			return (isset($this->sqlResult)) ? pg_fetch_array($this->sqlResult,$row_number,PGSQL_ASSOC) : NULL;
 		}
 
-		public function getNumberofColumns() {
-			return (isset($sqlResult)) ? pg_num_fields($sqlResult) : NULL;
+		public function getNumColumns() {
+			return (isset($this->sqlResult)) ? pg_num_fields($this->sqlResult) : NULL;
 		}
 
-		public function getNumberofRows() {
-			return (isset($sqlResult)) ? pg_num_rows($sqlResults) : NULL;
+		public function getNumRows() {
+			return (isset($this->sqlResult)) ? pg_num_rows($this->sqlResult) : NULL;
 		}
 
 	}
@@ -133,7 +133,7 @@
 					   			 	 $params);
 			}
 
-			if (!$result) throw new DBException("Execution of statement: ( $params ) has failed"); 
+			if (!$result) throw new DBException("Execution of a DB statement has failed."); 
 		}
 
 	}
