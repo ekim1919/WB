@@ -22,6 +22,7 @@
 				echo '<a href="/Webpages/Auth/login.php"> Login </a> <br>';
 			} else {
 				echo "Welcome " . $USERSESS->getUserName();
+				echo '<br> <a href="/Webpages/Auth/logout.php"> Logout </a>'; 
 			}
 
-			?>
+			

@@ -3,7 +3,7 @@
 	require($_SERVER['DOCUMENT_ROOT'] . '/include.php');
 
 	if($USERSESS->isLoggedIn()) {
-		$REDIRECTOR->redirect('index');	
+		$REDIRECTOR->redirectFromRoot('index');	
 	}
 
 	if(isset($_POST['username']) && isset($_POST['password'])) {
