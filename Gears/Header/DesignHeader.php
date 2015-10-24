@@ -2,7 +2,7 @@
 	<!DOCTYPE html>
 		<html>
 		<body>
-			<link rel="stylesheet" type="text/css" href="/Webpages/css/title.css">
+			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
 			<h1> 
 				Waifu Battle
 			</h1>
@@ -17,12 +17,12 @@
 
 			include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-			if (!$USERSESS->isloggedin()) {
-				echo '<a href="/Webpages/Auth/register.php"> Register </a>'; 
-				echo '<a href="/Webpages/Auth/login.php"> Login </a> <br>';
+
+			if (!$USERSESS->isLoggedIn()) {
+				echo '<a href="/Public/Auth/register.php"> Register </a>'; 
+				echo '<a href="/Public/Auth/login.php"> Login </a> <br>';
 			} else {
 				echo "Welcome " . $USERSESS->getUserName();
-				echo '<br> <a href="/Webpages/Auth/logout.php"> Logout </a>'; 
-			}
+				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';   		     }
 
-			
+			?>

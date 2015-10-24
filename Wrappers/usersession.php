@@ -13,6 +13,7 @@ class UserSession {
 	*/
 
 	public function __construct($name = "User_Session", $lifetime = 0, $path = '/', $domain = null, $secure = null) {
+
 		if(!isset($_SESSION)) {
 
 			session_name($name);
@@ -21,18 +22,20 @@ class UserSession {
 
 			$https = isset($secure) ? $secure : isset($_SERVER['HTTPS']);
 
-			session_set_cookie_params($lifetime, $path, $domain, $secure, true);
-
+			//session_set_cookie_params($lifetime, $path, $domain, $secure, true);
+                        //Domain setting was causing trouble. Will remedy this later.
 			session_start();
 
-			if(!checkSecurity()) {
+			if(!$this->checkSecurity()) { 
 
 				$_SESSION = array(); //Remove Old Session Data to prevent possbile hijacking
 				$_SESSION['IPADDRESS'] = $_SERVER['REMOTE_ADDR'];
 				$_SESSION['USERAGENT'] = $_SERVER['HTTP_USER_AGENT'];
+				
 			}			
-		}
 	}
+
+  }
 
 	private function checkSecurity() {
 

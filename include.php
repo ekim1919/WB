@@ -1,5 +1,5 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/Webpages/RenderingEngine/RenderingEngine.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/Public/RenderingEngine/RenderingEngine.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Wrappers/sqlDB.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Wrappers/usersession.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Wrappers/redirectwrapper.php");

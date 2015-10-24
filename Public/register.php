@@ -2,8 +2,6 @@
 	require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
 
-	if()
-
 	$RENDENGINE->renderFile(['Behavior/Auth/registerbehav','User/register'],$standard=True); //Bring in Register HTML from Gears
 
 ?>
