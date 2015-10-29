@@ -30,6 +30,9 @@
 		} else {
 
 			(new sqlDBExecute($connection,"INSERT INTO USERAUTHINFO VALUES ($1,$2);", array($username,$password)))->execute();
+			$USERSESS->logIn();
+			$USERSESS->setUserName($username);
+			$REDIRECTOR->redirectFromRoot('index');
 			
 		}
 

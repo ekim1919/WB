@@ -1,5 +1,5 @@
 <?php
 	require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-	$RENDENGINE->renderFile("User/regissuccessful",$standard=True);
+	$RENDENGINE->renderFile("Assets/User/regissuccessful",$standard=True);
 ?>

@@ -4,7 +4,7 @@
 		<body>
 			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
 			<h1> 
-				Waifu Battle
+				<a href= "/index.php"> Waifu Battle </a>
 			</h1>
 
 			<p>
@@ -17,12 +17,17 @@
 
 			include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
+			include($_SERVER['DOCUMENT_ROOT'] . "/utilities.php"); 
+
 
 			if (!$USERSESS->isLoggedIn()) {
 				echo '<a href="/Public/Auth/register.php"> Register </a>'; 
 				echo '<a href="/Public/Auth/login.php"> Login </a> <br>';
 			} else {
-				echo "Welcome " . $USERSESS->getUserName();
-				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';   		     }
+				echo escape_html($USERSESS->getUserName()) . "-&#27096;";
+				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';
+
+				$RENDENGINE->renderFile("Assets/User/greetings");   		     
+			}
 
 			?>

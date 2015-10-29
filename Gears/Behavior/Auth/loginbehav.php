@@ -22,8 +22,7 @@
 		} else {
 			$USERSESS->logIn();
 			$USERSESS->setUserName($username);
-			//$REDIRECTOR->redirectFromRoot('index');
-			header("Location: /index.php");
+			$REDIRECTOR->redirectFromRoot('index');
 		}
 
 	}		
