@@ -3,34 +3,23 @@ CREATE TABLE UserAuthInfo (
 	Username	VARCHAR(16) NOT NULL,
 	Password 	VARCHAR(32) NOT NULL,
 	PRIMARY KEY (Username));
-	
-CREATE TABLE User (
 
-	Username     VARCHAR(16),
-	Score        NUMBER(50) NOT NULL,
- 	PRIMARY KEY(Username),
- 	FOREIGN KEY(Username));
- 
 CREATE TABLE PointsSystem (
 
-	Score                 NUMBER(38) NOT NULL,
-	GoodSimpleGesture     NUMBER(4) NOT NULL,
-	GoodMidGesture        NUMBER(4) NOT NULL,
-	GoodAdvGesture        NUMBER(4) NOT NULL,
-	BadSimpleGesture      NUMBER(4) NOT NULL,
-	BadMidGesture         NUMBER(4) NOT NULL,
-	BadAdvGesture         NUMBER(4) NOT NULL,
-	PRIMARY KEY(Score)
-	FOREIGN KEY(Score));
+	Score                 integer NOT NULL,
+	GoodSimpleGesture     smallint NOT NULL,
+	GoodMidGesture        smallint NOT NULL,
+	GoodAdvGesture        smallint NOT NULL,
+	BadSimpleGesture      smallint NOT NULL,
+	BadMidGesture         smallint NOT NULL,
+	BadAdvGesture         smallint NOT NULL,
+	PRIMARY KEY(Score));
+	
+CREATE TABLE Player (
 
-CREATE TABLE GameRoster	(
-
-	Username         VARCHAR(16),
-	CharacterID      VARCHAR(20),
-	PRIMARY KEY(Username)
-	FOREIGN KEY(Username)
-	PRIMARY KEY(CharacterID)
-	FOREIGN KEY(CharacterID));
+	Username     VARCHAR(16) references UserAuthInfo(Username),
+	Score        integer NOT NULL references PointsSystem(Score),
+ 	PRIMARY KEY(Username));
  
 CREATE TABLE Character	(
 
@@ -46,8 +35,10 @@ CREATE TABLE Character	(
 	BodyType         VARCHAR(20),
 	Personality      VARCHAR(20),
 	PRIMARY KEY(CharacterID));
- 
-CREATE SEQUENCE Character_CharacterID_seq
- INCREMENT BY 1
- MINVALUE 1
- NOCYCLE;
+
+
+CREATE TABLE GameRoster	(
+
+	Username         VARCHAR(16) references UserAuthInfo(Username),
+	CharacterID      VARCHAR(20) references Character(CharacterID),
+	PRIMARY KEY(Username, CharacterID));
