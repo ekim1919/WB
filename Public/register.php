@@ -1,7 +1,7 @@
 <?php
 	require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-
-	$RENDENGINE->renderFile(['Behavior/Auth/registerbehav','Assets/User/register'],$standard=True); //Bring in Register HTML from Gears
+	$list = new RenderList([new File('Behavior/Auth/registerbehav'),new File('Assets/User/register')]);
+	$RENDENGINE->render($list,$standard=True); //Bring in Register HTML from Gears
 
 ?>

@@ -3,7 +3,8 @@
 	include("include.php");
 
 	//$RENDENGINE->standardRenderFile(["Test/StandardWelcomeTest","Test/TestingStandardRender"]);
-	$RENDENGINE->layeredRender(["f" => "Assets/Test/StandardWelcomeTest", "t" => "Another Text Layer."], $standard=True);
+	$list = new RenderList([new File("Assets/Test/StandardWelcomeTest"), new File("Assets/Test/TestingStandardRender")]);
+	$RENDENGINE->render($list,$standard=True);  
 
 
 //phpinfo();

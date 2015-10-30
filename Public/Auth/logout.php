@@ -2,5 +2,5 @@
 
 	require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 	
-	$RENDENGINE->renderFile('Behavior/Auth/logout');
+	$RENDENGINE->render(new File('Behavior/Auth/logout'));
 ?>

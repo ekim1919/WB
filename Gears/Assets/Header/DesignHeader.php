@@ -27,7 +27,7 @@
 				echo escape_html($USERSESS->getUserName()) . "-&#27096;";
 				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';
 
-				$RENDENGINE->renderFile("Assets/User/greetings");   		     
+				$RENDENGINE->render(new File("Assets/User/greetings"));   		     
 			}
 
 			?>

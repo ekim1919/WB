@@ -35,18 +35,14 @@ CREATE TABLE Character	(
 	BodyType         VARCHAR(20),
 	Personality      VARCHAR(20),
 	PRIMARY KEY(CharacterID));
-<<<<<<< HEAD
  
 CREATE SEQUENCE Character_CharacterID_seq
  INCREMENT BY 1
  MINVALUE 1
  NO CYCLE;
-=======
-
 
 CREATE TABLE GameRoster	(
 
 	Username         VARCHAR(16) references UserAuthInfo(Username),
 	CharacterID      VARCHAR(20) references Character(CharacterID),
 	PRIMARY KEY(Username, CharacterID));
->>>>>>> c6a316be286c8ee84d5cf932bb9ac31c2697c514

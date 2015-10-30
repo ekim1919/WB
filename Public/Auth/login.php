@@ -1,6 +1,7 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-$RENDENGINE->renderFile(["Behavior/Auth/loginbehav","Assets/User/login",], $standard=True);
+$list = new RenderList([new File("Behavior/Auth/loginbehav"),new File("Assets/User/login")]);
+$RENDENGINE->render($list, $standard=True);
 
 ?>

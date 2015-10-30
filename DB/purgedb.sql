@@ -1,11 +1,11 @@
-DROP Table UserAuthInfo CASCADE CONSTRAINTS
+DROP Table UserAuthInfo 
 /*PURGE*/;
-DROP Table User CASCADE CONSTRAINTS
+DROP Table User 
 /*PURGE*/;
-DROP Table PointsSystem CASCADE CONSTRAINTS
+DROP Table PointsSystem
 /*PURGE*/;
-DROP Table GameRoster CASCADE CONSTRAINTS
+DROP Table GameRoster
 /*PURGE*/;
-DROP Table Character CASCADE CONSTRAINTS
+DROP Table Character
 /*PURGE*/;
 
