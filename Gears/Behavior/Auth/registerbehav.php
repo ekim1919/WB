@@ -13,6 +13,10 @@
 			exit(); //A dirty fix to try to fix the attempt relogging. Will have to put the login html at the top of the page at some point.
 		}
 
+		$SANTIZER = new InputSanitizer($_POST);
+
+		
+
 		$username = trim($_POST['username']);
 		$password = md5($_POST['password']);
 
