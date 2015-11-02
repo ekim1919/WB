@@ -21,28 +21,49 @@ CREATE TABLE Player (
 	Score        integer NOT NULL references PointsSystem(Score),
  	PRIMARY KEY(Username));
  
+/*Values use the metric system*/
 CREATE TABLE Character	(
 
-	CharacterID      VARCHAR(20),
+	CharacterID      smallint,
 	FirstName        VARCHAR(20),
 	LastName         VARCHAR(20),
 	HairColor        VARCHAR(20),
 	EyeColor         VARCHAR(20),
 	Height           VARCHAR(20),
+        Weight           VARCHAR(20),
 	Bust             VARCHAR(20),
 	Waist            VARCHAR(20),
 	Hips             VARCHAR(20),
 	BodyType         VARCHAR(20),
 	Personality      VARCHAR(20),
 	PRIMARY KEY(CharacterID));
- 
-CREATE SEQUENCE Character_CharacterID_seq
- INCREMENT BY 1
- MINVALUE 1
- NO CYCLE;
 
 CREATE TABLE GameRoster	(
 
 	Username         VARCHAR(16) references UserAuthInfo(Username),
-	CharacterID      VARCHAR(20) references Character(CharacterID),
+	CharacterID      smallint references Character(CharacterID),
 	PRIMARY KEY(Username, CharacterID));
+
+CREATE SEQUENCE Character_CharacterID_seq
+ INCREMENT BY 1
+ MINVALUE 1
+ NO CYCLE;
+ 
+ /*Resets the "nextval" for the INSERT INTO command if needed. A user easily can execute 
+ an INSERT command with the same entries more than once, which affects the sequence.*/
+ALTER SEQUENCE Character_CharacterID_seq
+RESTART WITH /*Insert value here*/;
+
+/*A sample data insertion.*/
+INSERT INTO Character VALUES(nextval('Character_CharacterID_seq'),
+			'Yui',
+			'Hirasawa',
+			'Brown',
+			'Brown',
+                        '156',
+                        '50',
+                        'N/A',
+                        'N/A',
+                        'N/A',
+                        'N/A',
+                        'Dere');
