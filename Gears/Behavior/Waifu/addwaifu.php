@@ -2,7 +2,7 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-$post_array = array('firstname','lastname','haircolor','eyecolor','height','bustsize','hipsize','waistsize','bodytype','personality');
+$post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality');
 
 if(isset($_POST) && array_diff($post_array, array_keys($_POST))) {
 	echo "One or more variables were not set.";
@@ -18,6 +18,7 @@ $SANTIZER->addFilter("lastname",FILTER_SANITIZE_STRING);
 $SANTIZER->addFilter("haircolor",FILTER_SANITIZE_STRING);
 $SANTIZER->addFilter("eyecolor",FILTER_SANITIZE_STRING);
 $SANTIZER->addFilter("height",FILTER_SANITIZE_NUMBER_INT);
+$SANTIZER->addFilter("height",FILTER_SANITIZE_NUMBER_INT);
 $SANTIZER->addFilter("bustsize",FILTER_SANITIZE_NUMBER_INT);
 $SANTIZER->addFilter("hipsize",FILTER_SANITIZE_NUMBER_INT);
 $SANTIZER->addFilter("waistsize",FILTER_SANITIZE_NUMBER_INT);
@@ -30,7 +31,7 @@ $sant_array = $SANTIZER->filter();
 
 $connection = $DB->connect();
 
-(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",$sant_array))->execute();
+(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",$sant_array))->execute();
 }
 
 ?>

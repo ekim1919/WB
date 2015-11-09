@@ -30,7 +30,7 @@ CREATE TABLE Character	(
 	HairColor        VARCHAR(20),
 	EyeColor         VARCHAR(20),
 	Height           VARCHAR(20),
-        Weight           VARCHAR(20),
+    Weight           VARCHAR(20),
 	Bust             VARCHAR(20),
 	Waist            VARCHAR(20),
 	Hips             VARCHAR(20),

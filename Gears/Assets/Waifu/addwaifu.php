@@ -14,6 +14,7 @@
 			Hair Color:<br> <input <input type="text" name="haircolor"> <br>
 			Eye Color: <br><input type="text" name="eyecolor"> <br>
 			Height:<br><input type="text" name="height"> <br>
+			Weight:<br><input type="text" name="weight"> <br>
 			Bust: <br><input type="text" name="bustsize"> <br>
 			Hips: <br><input type="text" name="hipsize"> <br>
 			Waist:<br><input type="text" name="waistsize"> <br>
