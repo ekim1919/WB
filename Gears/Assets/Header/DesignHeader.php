@@ -17,14 +17,11 @@
 
 			include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
-			include($_SERVER['DOCUMENT_ROOT'] . "/utilities.php"); 
-
-
 			if (!$USERSESS->isLoggedIn()) {
 				echo '<a href="/Public/Auth/register.php"> Register </a>'; 
 				echo '<a href="/Public/Auth/login.php"> Login </a> <br>';
 			} else {
-				echo escape_html($USERSESS->getUserName()) . "-&#27096;";
+				echo OutputSanitizer::output($USERSESS->getUserName()) . "-&#27096;";
 				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';
 
 				$RENDENGINE->render(new File("Assets/User/greetings"));   		     

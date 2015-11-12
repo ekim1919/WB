@@ -12,11 +12,11 @@ class Text extends Renderable {
 	}
 
 	public function payload() {
-		return $text;
+		return $this->text;
 	}
 
 	public function render() {
-		echo $text;
+		echo $this->text;
 	}
 }
 

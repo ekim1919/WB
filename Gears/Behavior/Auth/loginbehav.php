@@ -9,12 +9,18 @@
 			exit(); //A dirty fix to try to fix the attempt relogging. Will have to put the login html at the top of the page at some point.
 		}
 
-		$username = trim($_POST['username']);
+		$SANTIZER = new InputSanitizer($_POST);
+
+		$SANTIZER->addFilter("username",FILTER_SANITIZE_STRING);
+
+		$sant_array = $SANTIZER->filter();		
+
+		$username = $sant_array[0];
 		$password = md5($_POST['password']);
 
 		$connection = $DB->connect();
 
-		$login_query = new sqlDBQueryResult($connection, "SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1", array($username));
+		$login_query = new sqlDBQueryResult($connection, "SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1", $params=array($username));
 		$login_query->query();
 
 		if($login_query->getNumRows() == 0) {

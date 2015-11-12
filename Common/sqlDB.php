@@ -76,7 +76,7 @@
 		private $statement;
 		private $params;
 
-		public function __construct($con, $statement,$params) {
+		public function __construct($con, $statement,$params=null) {
 
 			$this->con = $con;
 			$this->statement = $statement;
@@ -84,9 +84,8 @@
 		}
 
 		public function query() {
-			$this->sqlResult = pg_query_params($this->con,
-											   $this->statement,
-											   $this->params);
+
+			$this->sqlResult = ($this->params) ? pg_query_params($this->con, $this->statement, $this->params) : pg_query($this->con, $this->statement);
 			if(!($this->sqlResult)) {
 				unset($this->sqlResult);
 				throw new DBException("Result in a query lead to an error.");	

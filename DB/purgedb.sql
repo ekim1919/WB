@@ -1,11 +1,7 @@
-DROP Table UserAuthInfo 
-/*PURGE*/;
-DROP Table User 
-/*PURGE*/;
-DROP Table PointsSystem
-/*PURGE*/;
-DROP Table GameRoster
-/*PURGE*/;
-DROP Table Character
-/*PURGE*/;
-
+DROP Table UserAuthInfo CASCADE;
+DROP Table User CASCADE;
+DROP Table PointsSystem CASCADE;
+DROP Table GameRoster CASCADE;
+DROP Table Character CASCADE;
+DROP Table Player CASCADE;
+DROP SEQUENCE Character_Characterid_seq;

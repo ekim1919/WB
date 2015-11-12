@@ -2,6 +2,7 @@
 	
 	require($_SERVER['DOCUMENT_ROOT'] . '/include.php');
 
+
 	if($USERSESS->isLoggedIn()) {
 		$REDIRECTOR->redirectFromRoot('index');	
 	}
@@ -15,21 +16,23 @@
 
 		$SANTIZER = new InputSanitizer($_POST);
 
-		
+		$SANTIZER->addFilter("username",FILTER_SANITIZE_STRING);
 
-		$username = trim($_POST['username']);
+		$sant_array = $SANTIZER->filter();		
+
+		$username = $sant_array[0];
 		$password = md5($_POST['password']);
 
 		$connection = $DB->connect();
 
-		$username_available_query = new sqlDBQueryResult($connection, "SELECT EXISTS(SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1);",array($username));
+		$username_available_query = new sqlDBQueryResult($connection, "SELECT EXISTS(SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1);",$params=array($username));
 		$username_available_query->query();
 
 		$exist_row = $username_available_query->getRow();
 
 		//Username is already taken.
 		if($exist_row['exists'] == 't') {
-			echo 'Username is already taken. Please try again.';
+			$RENDENGINE->render(new Text('Username is already taken. Please try again.'));
 
 		} else {
 

@@ -7,6 +7,8 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Common/usersession.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Common/redirectwrapper.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Common/inputsanitizer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/Common/outputsanitizer.php");
+
 
 	$RENDENGINE = new RenderingEngine();
 	$DB = new sqlDBConnection();

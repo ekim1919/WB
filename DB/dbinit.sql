@@ -38,6 +38,13 @@ CREATE TABLE Character	(
 	Personality      VARCHAR(20),
 	PRIMARY KEY(CharacterID));
 
+
+CREATE TABLE CharacterImage (
+	
+	CharacterID smallint references Character(CharacterID),
+	ImagePath VARCHAR(256),
+	PRIMARY KEY(CharacterID));
+
 CREATE TABLE GameRoster	(
 
 	Username         VARCHAR(16) references UserAuthInfo(Username),
@@ -53,17 +60,4 @@ CREATE SEQUENCE Character_CharacterID_seq
  an INSERT command with the same entries more than once, which affects the sequence.*/
 ALTER SEQUENCE Character_CharacterID_seq
 RESTART WITH /*Insert value here*/;
-
-/*A sample data insertion.*/
-INSERT INTO Character VALUES(nextval('Character_CharacterID_seq'),
-			'Yui',
-			'Hirasawa',
-			'Brown',
-			'Brown',
-                        '156',
-                        '50',
-                        'N/A',
-                        'N/A',
-                        'N/A',
-                        'N/A',
-                        'Dere');
+               
