@@ -8,12 +8,12 @@ $post_array = array('firstname','lastname','haircolor','eyecolor','height','weig
 $avatar_img = $_FILES['avatar']['tmp_name'];
 
 
-if(isset($_POST) && !array_diff($post_array, array_keys($_POST))) {
+if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK)) {
 
 	$SANTIZER = new InputSanitizer($_POST);
 
 
-	//Will think of better sanitize flags. Will add validation steps as well.
+	//Will think of better sanitize flags. Will add validation steps as well. Remember to santize avatar as well.
 
 	$SANTIZER->addFilter("firstname",FILTER_SANITIZE_STRING);
 	$SANTIZER->addFilter("lastname",FILTER_SANITIZE_STRING);
@@ -38,9 +38,6 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST))) {
 	$img_mang->saveImgonServer($sant_array[0] . $sant_array[1]); //Very flawed. Need to change naming scheme. 
 
 	(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",$sant_array))->execute();
-
-
-
 }
 
 ?>

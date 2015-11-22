@@ -83,7 +83,7 @@ class ImageManager {
 		$img_name_on_server = $name . '.' . $this->avatar_img_type;
 		$avatar_img_path = "$this->IMAGE_ROOT/" . $img_name_on_server;
 
-		if(!copy($this->src_img, $avatar_img_path)) { //Copy file into $image_root for storage
+		if(!move_uploaded_file($this->src_img, $avatar_img_path)) { //Copy file into $image_root for storage
 			$RENDENGINE->render(new Text("Serverside Error: Saving Image Failed."));
 			exit;
 		}	

@@ -1,4 +1,8 @@
 <?php
+
+	/*
+	Notes: OutputSantitation incoportated into the RenderEngine?
+	*/
 	
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Base/baseexception.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Base/renderable.php");

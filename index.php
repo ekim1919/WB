@@ -7,6 +7,6 @@
 	$RENDENGINE->render($list,$standard=True);  
 
 
-//phpinfo();
+phpinfo();
 
 ?>
