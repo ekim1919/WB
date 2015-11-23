@@ -39,7 +39,7 @@ if(isset($_GET['characterid'])) {
 
 		//Picture Adding. Will change when I change the naming scheme of the pictures to a better scheme. 
 
-		$rendList->addRenderable(new Text("<img class=\"character\" src=\"\Images\\" .$val_arr["First Name"] . $val_arr["Last Name"] . ".jpg" . "\" style=\"float: right; margin-left: auto;\">"));
+		$rendList->addRenderable(new Text("<img class=\"img-polaroid\" src=\"\Images\\" .$val_arr["First Name"] . $val_arr["Last Name"] . ".jpg" . "\" style=\"float: right; margin-left: auto;\">"));
 
 
 		$rendList->addRenderable(new Text("</div>"));

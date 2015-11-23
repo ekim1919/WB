@@ -1,7 +1,17 @@
 
 	<!DOCTYPE html>
 		<html>
+
+		<head>
+
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+			<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		</head>
+
 		<body>
+			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
+
 			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
 			<h1> 
 				<a href= "/index.php"> Waifu Battle </a>
@@ -18,8 +28,8 @@
 			include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 
 			if (!$USERSESS->isLoggedIn()) {
-				echo '<a href="/Public/Auth/register.php"> Register </a>'; 
-				echo '<a href="/Public/Auth/login.php"> Login </a> <br>';
+				echo '<a href="/Public/Auth/register.php" class="btn btn-large btn-primary"> Register </a>'; 
+				echo '<a href="/Public/Auth/login.php" class="btn btn-large btn-primary"> Login </a> <br>';
 			} else {
 				echo OutputSanitizer::output($USERSESS->getUserName()) . "-&#27096;";
 				echo '<br> <a href="/Public/Auth/logout.php"> Logout </a>';
