@@ -23,9 +23,13 @@ if(isset($_POST) && !array_diff($post_array,array_keys($_POST))) {
 
 	$result_list = new RenderList();
 
+	$result_list->addRenderable(new Text("<div class=\"list-group\">"));
+
 	while ($row = $char_query->getRow()) {
-		$result_list->addRenderable(new Text("<a href=/Public/Waifu/waifu.php?characterid=" . $row["characterid"] . ">" . $row["firstname"] . " " . $row["lastname"] . "</a>"));
+		$result_list->addRenderable(new Text("<a href=/Public/Waifu/waifu.php?characterid=" . $row["characterid"] . " class=\"list-group-item\">" . $row["firstname"] . " " . $row["lastname"] . "</a>"));
 	}
+
+	$result_list->addRenderable(new Text("</div>")); //Add this encapsulation functionality in render list class? or different object?
 
 	$RENDENGINE->render($result_list);
 }

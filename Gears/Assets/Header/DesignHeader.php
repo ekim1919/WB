@@ -5,13 +5,13 @@
 		<head>
 
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
-			<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="/Public/bootstrap/css/bootstrap.css">
+			<link rel="stylesheet" type="text/css" href="/Public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="/Public/dropzone/dropzone.css">
+			<script src="/Public/dropzone/dropzone.js"></script>
 		</head>
 
 		<body>
-			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
-
 			<link rel="stylesheet" type="text/css" href="/Public/css/title.css">
 			<h1> 
 				<a href= "/index.php"> Waifu Battle </a>

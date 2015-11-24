@@ -5,10 +5,15 @@ require($_SERVER['DOCUMENT_ROOT'] . "/Common/img.php");
 
 
 $post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality');
-$avatar_img = $_FILES['avatar']['tmp_name'];
+$avatar_img = !empty($_FILES) ? $_FILES['files']['tmp_name'] : null;
 
+if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FILES) && ($_FILES["files"]["error"] == UPLOAD_ERR_OK)) {
 
-if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK)) {
+	if(in_array("", array_values($_POST))) {
+		$RENDENGINE->render(new Text("Sorry. One of more of the fields were not filled out!"));
+		exit;
+	}
+
 
 	$SANTIZER = new InputSanitizer($_POST);
 

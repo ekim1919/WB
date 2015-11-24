@@ -3,17 +3,14 @@
 		Character List
 	</h2>
 
-	<link rel="stylesheet" type="text/css" href="/Public/css/default.css">
 
-	<default id="form">
+		<form id="form-inline" name="register" action="/Public/Waifu/search.php" method="post">
 
-		<form id="fm" name="register" action="/Public/Waifu/search.php" method="post">
-			First Name: <br><input type="text" name="firstname"> <br>
-			Last Name: <br><input type="text" name="lastname"> <br>
-			<input type="submit" value="Submit">
+			<input type="text" name="firstname" placeholder="First Name">
+			<input type="text" name="lastname" placeholder="Last Name">
+			<button type="submit" class="btn "value="Submit">Query</button>
 		</form>
 
-	</default>
 
 
 
