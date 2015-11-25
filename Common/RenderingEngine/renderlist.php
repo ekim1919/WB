@@ -29,7 +29,10 @@ class RenderList extends Renderable {
 	}
 
 	public function payload() {
-		return $this->renderable;
+			$rend = $this->renderable;
+			$build = "";
+			foreach($rend as $ren) $build .= $ren->payload();
+			return $build;
 	}
 }
 

@@ -12,6 +12,7 @@ class ImageManager {
 
 	private $src_img; //Contains a pointer to the image.
 	private $avatar_img_type;
+	private $avatar_gd_resource;
 
 	private $accepted_img_file_types = array( //File types of accepted images. This can change based on
 		'image/jpeg' => 'jpg',                //what types we want to use. 
@@ -19,39 +20,62 @@ class ImageManager {
 		'image/gif' => 'gif',
 		'image/pjpeg' => 'jpg');
 
+	private $gd_create_resource = array(
+		'jpg' => 'imagecreatefromjpeg',
+		'png' => 'imagecreatefrompng',
+		'gif' => 'imagecreatefromgif');
+
+	private $gd_release_resource = array (
+		'jpg' => 'imagejpeg',
+		'png' => 'imagepng',
+		'gif' => 'imagegif');	
+
+
 	private $MAX_WIDTH = 1000;
 	private $MAX_HEIGHT = 1000;
 	private $IMAGE_ROOT;
-	private $THUMB_WIDTH = 125;
-	private $THUMB_HEIGHT = 125; 
+	private $THUMB_IMAGE_ROOT;
+	private $THUMB_WIDTH = 64;
+	private $THUMB_HEIGHT = 64; 
 
 
 	public function __construct($src_img) {
 		$this->src_img = $src_img;
 		$this->IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . '/Images';
+		$this->THUMB_IMAGE_ROOT = $this->IMAGE_ROOT ."/Thumbnails/";
 		$this->validateImg($this->src_img);
+
+		$this->avatar_gd_resource = $this->gd_create_resource[$this->avatar_img_type]($src_img);
 	}
 
-	function make_thumb($src_img) { //Make Thumb Nail Image
 
-		$img_width = imagesx($src_img);
-		$img_height = imagesy($src_img);
+	public function makeThumbNail($name) { //Make Thumb Nail Image and save it at Thumbnail Image Root
+
+		$img_width = imagesx($this->avatar_gd_resource);
+		$img_height = imagesy($this->avatar_gd_resource);
 		
 		if(($img_width > $this->THUMB_HEIGHT) || ($img_height > $this->THUMB_WIDTH)) { //Only create thumb nail if bigger than thumb nail dimensions
 		
-			$ratio = ($img_width > $img_height) ? $THUMB_WIDTH / $img_width : //Find a ratio based on the ratio of the longest side and the thumbnail length
-										  $THUMB_HEIGHT / $img_height;
+			$ratio = ($img_width > $img_height) ? $this->THUMB_WIDTH / $img_width : //Find a ratio based on the ratio of the longest side and the thumbnail length
+										  		  $this->THUMB_HEIGHT / $img_height;
 			
 			$round_width = round($img_width * $ratio);
 			$round_height = round($img_height * $ratio);
 			$thumb_img = imagecreatetruecolor($round_width, $round_height);
 			
-			imagecopyresampled($thumb_img, $src_img, 0, 0, 0, 0,
+			imagecopyresampled($thumb_img, $this->avatar_gd_resource, 0, 0, 0, 0,
 							   $round_width, $round_height, $img_width, $img_height); //Copy the source image into the thumb nail dimensions
 		} else { //Else just use smaller image
-			$thumb_img = $src_img;
+			$thumb_img = $this->avatar_gd_resource;
 		}
-		return $thumb_img;
+
+		$thumb_name = $name . "T." . $this->avatar_img_type; //Construct Extension
+			
+		$thumb_path = $this->THUMB_IMAGE_ROOT . $thumb_name;
+
+		$this->gd_release_resource[$this->avatar_img_type]($thumb_img, $thumb_path);
+
+		return $thumb_name;
 	}
 
 	private function validateImg() {
@@ -86,17 +110,14 @@ class ImageManager {
 		if(!move_uploaded_file($this->src_img, $avatar_img_path)) { //Copy file into $image_root for storage
 			$RENDENGINE->render(new Text("Serverside Error: Saving Image Failed."));
 			exit;
-		}	
+		}
+
+		return $img_name_on_server;	
 	}
 
 	public function __destruct() {
-		if($this->src_img) imagedestroy($this->src_img);
+		if($this->avatar_gd_resource) imagedestroy($this->avatar_gd_resource);
 	}
 
-
 }
-
-
-
-
 ?>

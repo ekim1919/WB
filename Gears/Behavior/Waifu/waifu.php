@@ -22,24 +22,25 @@ if(isset($_GET['characterid'])) {
 	$char_stat_arr = $character_query->getRow();
 
 	if($char_stat_arr == null) {
+
 		$RENDENGINE->render(new Text("NO WAIFU DESU!!!! Nonexistent Character!"));
+
 	} else {
+		
 		$rendList = new RenderList();
 
 		$rendList->addRenderable(new Text("<div id=\"stats\">"));
 
-		//var_dump($char_stat_arr);
-
-		$key_arr = ["CharacterID","First Name", "Last Name","Hair Color","Eye Color","Height","Weight","Bust","Waist","Hips","Body Type","Personality"];
+		$key_arr = ["CharacterID","First Name", "Last Name","Hair Color","Eye Color","Height","Weight","Bust","Waist","Hips","Body Type","Personality","AvatarPath","AvatarThumbPath"];
 		$val_arr = array_combine($key_arr, array_values($char_stat_arr));
 
-		foreach($val_arr as $key => $value) {
+		foreach($val_arr as $key => $value) { //Add permissions.
 			$rendList->addRenderable(new Text("<ul> $key: $value </ul>"));
 		}
 
-		//Picture Adding. Will change when I change the naming scheme of the pictures to a better scheme. 
+		//Picture Adding. In need of a configuration class badly. 
 
-		$rendList->addRenderable(new Text("<img class=\"img-polaroid\" src=\"\Images\\" .$val_arr["First Name"] . $val_arr["Last Name"] . ".jpg" . "\" style=\"float: right; margin-left: auto;\">"));
+		$rendList->addRenderable(new Text('<img class="img-polaroid" src="/Images/' . $val_arr["AvatarPath"] .  '"style=float: right; margin-left: auto;>'));
 
 
 		$rendList->addRenderable(new Text("</div>"));

@@ -1,7 +1,7 @@
 <?php
 
 include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
-require($_SERVER['DOCUMENT_ROOT'] . "/Common/img.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/Common/ImageManager/img.php");
 
 
 $post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality');
@@ -40,9 +40,16 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 
 	$img_mang = new ImageManager($avatar_img);
 
-	$img_mang->saveImgonServer($sant_array[0] . $sant_array[1]); //Very flawed. Need to change naming scheme. 
+	$avatar_name = md5(implode("",$sant_array)); //Hash all values. Assuming values will be "unique enough"
 
-	(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",$sant_array))->execute();
+	$avatar_path = $img_mang->saveImgonServer($avatar_name); //Very flawed. Need to change naming scheme. 
+
+	$thumb_path = $img_mang->makeThumbNail($avatar_name); //Make the character thumbnail as well.
+
+	$sant_array[] = $avatar_path;
+	$sant_array[] = $thumb_path;
+
+	(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",$sant_array))->execute();
 }
 
 ?>

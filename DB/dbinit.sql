@@ -36,13 +36,8 @@ CREATE TABLE Character	(
 	Hips             VARCHAR(20),
 	BodyType         VARCHAR(20),
 	Personality      VARCHAR(20),
-	PRIMARY KEY(CharacterID));
-
-
-CREATE TABLE CharacterImage (
-	
-	CharacterID smallint references Character(CharacterID),
-	ImagePath VARCHAR(256),
+	AvatarPath		 VARCHAR(128),
+	AvatarThumbPath  VARCHAR(128),
 	PRIMARY KEY(CharacterID));
 
 CREATE TABLE GameRoster	(
