@@ -1,6 +1,8 @@
 <?php
 
 include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
+include_once($_SERVER['DOCUMENT_ROOT'] ."/config.php");
+
 
 //Will add actual search function later. For now, I will simply dump the rows in the DB until Character page is done.
 
@@ -28,8 +30,8 @@ if(isset($_POST) && !array_diff($post_array,array_keys($_POST))) {
 	$result_list->addRenderable(new Text($media_head)); //Turn this into a file. More convenient.
 
 	while ($row = $char_query->getRow()) {
-		$media_rend = new RenderList([new Text('<a class="media-left" href=/Public/Waifu/waifu.php?characterid=' . $row["characterid"] . '>'),
-									  new Text('<img class="media-object" data-src="/Images/Thumbnails/' . $row["avatarthumbpath"] . '"></a></div>'),
+		$media_rend = new RenderList([new Text('<a class="media-left" href="/Public/Waifu/waifu.php?characterid=' . $row["characterid"] . '">'),
+									  new Text('<img class="media-object" src="' . Config::THUMB_IMAGE_ROOT . $row["avatarthumbpath"] . '"></a>'),
 									  new Text('<div class="media-body">' . $row["firstname"] . $row["lastname"])]);
 		$result_list->addRenderable($media_rend);
 	}

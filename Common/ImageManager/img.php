@@ -7,6 +7,7 @@ Will rethink about the performance and memory costs of such a class.
 */
 
 require($_SERVER['DOCUMENT_ROOT'] . '/include.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/config.php');
 
 class ImageManager {
 
@@ -14,11 +15,7 @@ class ImageManager {
 	private $avatar_img_type;
 	private $avatar_gd_resource;
 
-	private $accepted_img_file_types = array( //File types of accepted images. This can change based on
-		'image/jpeg' => 'jpg',                //what types we want to use. 
-		'image/png' => 'png',
-		'image/gif' => 'gif',
-		'image/pjpeg' => 'jpg');
+	private $accepted_img_file_types;
 
 	private $gd_create_resource = array(
 		'jpg' => 'imagecreatefromjpeg',
@@ -31,18 +28,30 @@ class ImageManager {
 		'gif' => 'imagegif');	
 
 
-	private $MAX_WIDTH = 1000;
-	private $MAX_HEIGHT = 1000;
 	private $IMAGE_ROOT;
+	private $MAX_WIDTH;
+	private $MAX_HEIGHT;
+
 	private $THUMB_IMAGE_ROOT;
-	private $THUMB_WIDTH = 64;
-	private $THUMB_HEIGHT = 64; 
+	private $THUMB_WIDTH ;
+	private $THUMB_HEIGHT; 
 
 
 	public function __construct($src_img) {
 		$this->src_img = $src_img;
-		$this->IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . '/Images';
-		$this->THUMB_IMAGE_ROOT = $this->IMAGE_ROOT ."/Thumbnails/";
+
+		$this->IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::IMAGE_ROOT;
+		$this->THUMB_IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::THUMB_IMAGE_ROOT;
+
+		$this->MAX_WIDTH = Config::MAX_WIDTH;		
+		$this->MAX_HEIGHT = Config::MAX_WIDTH;
+
+		$this->THUMB_HEIGHT = Config::THUMB_HEIGHT;
+		$this->THUMB_WIDTH = Config::THUMB_WIDTH;
+
+
+		$this->accepted_img_file_types = Config::ACCEPTED_IMG_TYPES;
+
 		$this->validateImg($this->src_img);
 
 		$this->avatar_gd_resource = $this->gd_create_resource[$this->avatar_img_type]($src_img);
@@ -83,10 +92,11 @@ class ImageManager {
 		$img_info = getimagesize($this->src_img); //Getting information and checking if it is of the supported types
 		$avatar_img_type = $img_info["mime"];
 
+		
 
 		$img_type = $this->accepted_img_file_types[$avatar_img_type]; //Must be changed with a configuration. 
 
-		if(!$img_type || !$img_info[0]) {
+		if(!$img_type) {
 			$RENDENGINE->render(new Text("Image is not of supported types. Please use a Supported Image.")); //Must be fixed. Within Class. Musted be passed to separate error object.
 			exit;
 		}
@@ -105,7 +115,7 @@ class ImageManager {
 	public function saveImgonServer($name) { //Will have to accomodate both user and character. A redesign is needed.
 
 		$img_name_on_server = $name . '.' . $this->avatar_img_type;
-		$avatar_img_path = "$this->IMAGE_ROOT/" . $img_name_on_server;
+		$avatar_img_path = "$this->IMAGE_ROOT" . $img_name_on_server;
 
 		if(!move_uploaded_file($this->src_img, $avatar_img_path)) { //Copy file into $image_root for storage
 			$RENDENGINE->render(new Text("Serverside Error: Saving Image Failed."));

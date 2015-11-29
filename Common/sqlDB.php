@@ -1,6 +1,7 @@
 <?php
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/Base/baseexception.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/config.php");
 
 	class DBException extends BaseException {
 
@@ -27,11 +28,11 @@
 		//Keeps number of available instances
 		private static $instances = 0;
 
-		public function __construct($hostname="localhost",$username="postgres",$password=NULL,$port=5432) {
-			$this->dbHostname = $hostname;
-			$this->dbUsername = $username;
-			$this->dbPassword = $password;
-			$this->dbPort = $port;	
+		public function __construct() {
+			$this->dbHostname = Config::DB_HOSTNAME;
+			$this->dbUsername = Config::DB_USERNAME;
+			$this->dbPassword = Config::DB_PASSWORD;
+			$this->dbPort = Config::DB_PORT;	
 		}
 
 		public function connect() {
