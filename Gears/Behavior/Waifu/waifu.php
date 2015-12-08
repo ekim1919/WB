@@ -29,13 +29,14 @@ if(isset($_GET['characterid'])) {
 		
 		$rendList = new RenderList();
 
-		$rendList->addRenderable(new Text("<div id=\"stats\">"));
+		$rendList->addRenderable(new Text('<div class="waifu"> <table> <tr> <th> Field </th> <th> Value </th></tr>'));
 
 		$key_arr = ["CharacterID","First Name", "Last Name","Hair Color","Eye Color","Height","Weight","Bust","Waist","Hips","Body Type","Personality","AvatarPath","AvatarThumbPath"];
 		$val_arr = array_combine($key_arr, array_values($char_stat_arr));
 
+
 		foreach($val_arr as $key => $value) { //Add permissions.
-			$rendList->addRenderable(new Text("<ul> $key: $value </ul>"));
+			$rendList->addRenderable(new Text("<tr> <td> $key </td> <td> $value </td> </tr>"));
 		}
 
 		//Picture Adding. In need of a configuration class badly. 
@@ -43,7 +44,7 @@ if(isset($_GET['characterid'])) {
 		$rendList->addRenderable(new Text('<img class="img-polaroid" src="/Images/' . $val_arr["AvatarPath"] .  '"style=float: right; margin-left: auto;>'));
 
 
-		$rendList->addRenderable(new Text("</div>"));
+		$rendList->addRenderable(new Text("</table></div>"));
 
 		$RENDENGINE->render($rendList);
 	}

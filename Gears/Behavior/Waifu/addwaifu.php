@@ -42,7 +42,7 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 
 	$avatar_name = md5(implode("",$sant_array)); //Hash all values. Assuming values will be "unique enough"
 
-	$avatar_path = $img_mang->saveImgonServer($avatar_name); //Very flawed. Need to change naming scheme. 
+	$avatar_path = $img_mang->makeAvatar($avatar_name); //Very flawed. Need to change naming scheme. 
 
 	$thumb_path = $img_mang->makeThumbNail($avatar_name); //Make the character thumbnail as well.
 

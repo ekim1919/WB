@@ -1,13 +1,48 @@
-#form 
 
-{
-	text-align:center;
-	vertical-align:middle;
+
+#nav {
+	border:solid pink 2px;
 }
 
-#fm
-
-{
-	display: inline-block;
-	vertical-align: middle;
+#nav a, #nav a:visited {
+	display:inline;
 }
+
+#nav a span {
+	display: inline;
+}
+
+span + span {
+	margin-left: 10px;	
+}
+
+
+.waifu img {
+	float:right;
+}
+
+.waifu table {
+	border-collapse: collapse;
+	float:left;
+	width:30%;
+}
+
+.waifu th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.waifu th {
+    background-color: #FF69B4;
+    color: white;
+}
+
+.waifuinfo div {
+	display: block;
+}
+
+
+
+

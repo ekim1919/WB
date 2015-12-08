@@ -14,7 +14,6 @@ class ImageManager {
 	private $src_img; //Contains a pointer to the image.
 	private $avatar_img_type;
 	private $avatar_gd_resource;
-
 	private $accepted_img_file_types;
 
 	private $gd_create_resource = array(
@@ -27,14 +26,8 @@ class ImageManager {
 		'png' => 'imagepng',
 		'gif' => 'imagegif');	
 
-
 	private $IMAGE_ROOT;
-	private $MAX_WIDTH;
-	private $MAX_HEIGHT;
-
-	private $THUMB_IMAGE_ROOT;
-	private $THUMB_WIDTH ;
-	private $THUMB_HEIGHT; 
+	private $THUMB_IMAGE_ROOT; 
 
 
 	public function __construct($src_img) {
@@ -42,13 +35,6 @@ class ImageManager {
 
 		$this->IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::IMAGE_ROOT;
 		$this->THUMB_IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::THUMB_IMAGE_ROOT;
-
-		$this->MAX_WIDTH = Config::MAX_WIDTH;		
-		$this->MAX_HEIGHT = Config::MAX_WIDTH;
-
-		$this->THUMB_HEIGHT = Config::THUMB_HEIGHT;
-		$this->THUMB_WIDTH = Config::THUMB_WIDTH;
-
 
 		$this->accepted_img_file_types = Config::ACCEPTED_IMG_TYPES;
 
@@ -58,15 +44,15 @@ class ImageManager {
 	}
 
 
-	public function makeThumbNail($name) { //Make Thumb Nail Image and save it at Thumbnail Image Root
+	public function shrinkImg($resized_width,$resized_height,$img_path) { //Make Thumb Nail Image and save it at Thumbnail Image Root
 
 		$img_width = imagesx($this->avatar_gd_resource);
 		$img_height = imagesy($this->avatar_gd_resource);
 		
-		if(($img_width > $this->THUMB_HEIGHT) || ($img_height > $this->THUMB_WIDTH)) { //Only create thumb nail if bigger than thumb nail dimensions
+		if(($img_width > $resized_width) || ($img_height > $resized_height)) { //Only create thumb nail if bigger than thumb nail dimensions
 		
-			$ratio = ($img_width > $img_height) ? $this->THUMB_WIDTH / $img_width : //Find a ratio based on the ratio of the longest side and the thumbnail length
-										  		  $this->THUMB_HEIGHT / $img_height;
+			$ratio = ($img_width > $img_height) ? $resized_width / $img_width : //Find a ratio based on the ratio of the longest side and the thumbnail length
+										  		  $resized_height / $img_height;
 			
 			$round_width = round($img_width * $ratio);
 			$round_height = round($img_height * $ratio);
@@ -78,21 +64,35 @@ class ImageManager {
 			$thumb_img = $this->avatar_gd_resource;
 		}
 
-		$thumb_name = $name . "T." . $this->avatar_img_type; //Construct Extension
-			
+		$this->gd_release_resource[$this->avatar_img_type]($thumb_img, $img_path);
+	}
+
+	public function makeThumbNail($name) {
+
+		$thumb_name = $name . "T." . $this->avatar_img_type;
+
 		$thumb_path = $this->THUMB_IMAGE_ROOT . $thumb_name;
 
-		$this->gd_release_resource[$this->avatar_img_type]($thumb_img, $thumb_path);
+		$this->shrinkImg(Config::THUMB_HEIGHT,Config::THUMB_WIDTH, $thumb_path);
 
 		return $thumb_name;
+	}
+
+	public function makeAvatar($name) {
+
+		$avatar_name = $name . '.' . $this->avatar_img_type;
+
+		$avatar_path = $this->IMAGE_ROOT . $avatar_name;
+
+		$this->shrinkImg(Config::MAX_HEIGHT,Config::MAX_WIDTH,$avatar_path);
+
+		return $avatar_name;
 	}
 
 	private function validateImg() {
 
 		$img_info = getimagesize($this->src_img); //Getting information and checking if it is of the supported types
 		$avatar_img_type = $img_info["mime"];
-
-		
 
 		$img_type = $this->accepted_img_file_types[$avatar_img_type]; //Must be changed with a configuration. 
 
@@ -102,27 +102,6 @@ class ImageManager {
 		}
 
 		$this->avatar_img_type = $img_type;
-	
-		list($width, $height, $type, $attr) = $img_info;
-
-		if($width > $this->MAX_WIDTH || $height > $this->MAX_HEIGHT) {
-			$RENDENGINE->render(new Text("Your picture's dimensions are too large. Your image must be $max_width by $max_height"));
-			exit;
-		}		
-
-	}
-
-	public function saveImgonServer($name) { //Will have to accomodate both user and character. A redesign is needed.
-
-		$img_name_on_server = $name . '.' . $this->avatar_img_type;
-		$avatar_img_path = "$this->IMAGE_ROOT" . $img_name_on_server;
-
-		if(!move_uploaded_file($this->src_img, $avatar_img_path)) { //Copy file into $image_root for storage
-			$RENDENGINE->render(new Text("Serverside Error: Saving Image Failed."));
-			exit;
-		}
-
-		return $img_name_on_server;	
 	}
 
 	public function __destruct() {
