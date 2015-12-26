@@ -13,6 +13,18 @@ span + span {
 	margin-left: 10px;	
 }
 
+#user img {
+	float:right;
+}
+
+.userinfo {
+	float:left;
+	width:50%;
+}
+
+.aboutuser {
+	border:solid pink 2px;	
+}
 
 #waifu img {
 	float:right;

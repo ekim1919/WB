@@ -21,11 +21,11 @@
 		$sant_array = $SANTIZER->filter();		
 
 		$username = $sant_array[0];
-		$password = md5($_POST['password']);
+		$password = md5($_POST['password']); //Invest better password system. 
 
 		$connection = $DB->connect();
 
-		$username_available_query = new sqlDBQueryResult($connection, "SELECT EXISTS(SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1);",$params=array($username));
+		$username_available_query = new sqlDBQueryResult($connection, "SELECT EXISTS(SELECT 1 FROM USERINFO WHERE USERNAME = $1);",$params=array($username));
 		$username_available_query->query();
 
 		$exist_row = $username_available_query->getRow();
@@ -36,8 +36,8 @@
 
 		} else {
 
-			(new sqlDBExecute($connection,"INSERT INTO USERAUTHINFO VALUES ($1,$2);", array($username,$password)))->execute();
-			$USERSESS->logIn();
+			(new sqlDBExecute($connection,"INSERT INTO USERINFO VALUES (nextval('User_UserID_seq'),$1,$2);", array($username,$password)))->execute();
+			$USERSESS->logIn(); //A separate successful registeration page needs to be made. This is broken for now.
 			$USERSESS->setUserName($username);
 			$REDIRECTOR->redirectFromRoot('index');
 			

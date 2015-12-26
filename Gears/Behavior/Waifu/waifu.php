@@ -68,8 +68,8 @@ if(isset($_GET['characterid'])) {
 		$rendList->addRenderable(new Text("</div>"));
 
 		$RENDENGINE->render($rendList);
-	} else {
-		$RENDENGINE->render(new Text("No such Character ID can be found."));		
-	}
+	} 
+} else {
+		$RENDENGINE->render(new Text("No such Character ID can be found."),$standard=True);		
 }
 ?>

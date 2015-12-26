@@ -2,8 +2,9 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/include.php');
 	
-	echo '<span><a href="/Public/Waifu/addwaifu.php"> Add your Waifu </a></span>';
-	echo '<span><a href="/Public/Waifu/search.php"> Search for a Waifu </a></span> ';
-	echo '<span><a href="/Public/User/profile.php">Profile</a></span>';
+	$rendlist = new RenderList(new Text('<span><a href="/Public/Waifu/addwaifu.php"> Add your Waifu </a></span>'),
+							   new Text('<span><a href="/Public/Waifu/search.php"> Search for a Waifu </a></span>'),
+							   new Text('<span><a href="/Public/User/profile.php?userid=">Profile</a></span>'));
+	$RENDENGINE->render($rendlist);
 ?>
 </div>

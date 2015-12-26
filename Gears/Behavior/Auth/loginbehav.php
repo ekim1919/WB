@@ -20,14 +20,19 @@
 
 		$connection = $DB->connect();
 
-		$login_query = new sqlDBQueryResult($connection, "SELECT 1 FROM USERAUTHINFO WHERE USERNAME = $1", $params=array($username));
+		$login_query = new sqlDBQueryResult($connection, "SELECT UserID FROM USERAUTHINFO WHERE USERNAME = $1", $params=array($username));
 		$login_query->query();
 
-		if($login_query->getNumRows() == 0) {
+		$login_result = $login_query->getRows();
+
+		if ($login_result == null) {
 			echo 'No such username was found';
 		} else {
+
+			$userid = $login_result["userid"];
+
 			$USERSESS->logIn();
-			$USERSESS->setUserName($username);
+			$USERSESS->setUserFields($username,$userid);
 			$REDIRECTOR->redirectFromRoot('index');
 		}
 

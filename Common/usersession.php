@@ -55,12 +55,17 @@ class UserSession {
 		$_SESSION["LOGGEDIN"] = True;
 	} 
 
-	public function setUserName($username) {
+	public function setUserFields($username,$userid) {
 		$_SESSION["USERNAME"] = $username;
-	}
+		$_SESSION["USERID"] = $userid;
+ 	}
 
 	public function getUserName() {
 		return $_SESSION["USERNAME"];
+	}
+
+	public function getUserID() {
+		return $_SESSION["USERID"];
 	}
 
 	public function logout() {
