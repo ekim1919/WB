@@ -1,18 +1,15 @@
 
-
-<div class='container'>
-	<fieldset>
+<fieldset>
 
 <legend>
 	Add a Character
 </legend>
 
-			<form id="add-char-form" class="form-horizontal" name="register" action="/Public/Waifu/addwaifu.php" enctype="multipart/form-data" method="post">
+			<form id="add-char-form" class="form-horizontal" id="register" action="/Public/Waifu/addwaifu.php" enctype="multipart/form-data" method="post">
 
 					<div class="form-group">
 						<input type="text" name="firstname" placeholder="First Name">
 					</div>
-
 
 					<div class="form-group">					
 						<input type="text" name="lastname" placeholder="Last Name"> 
@@ -53,11 +50,14 @@
 					<div class="form-group">							
 						<input type="text" name="personality" placeholder="Personality">
 					</div>
-					<label> Image: </label> <br>
 
 					<div class="form-group">
-						<input name="files" type="file" accept="image/*">
+    					<textarea name="description" rows="7" columns="20"> Enter a description here </textarea>
 					</div>
+
+					<label> Image: </label> <br>
+
+				    <input name="files" type="file" accept="image/*">
 
 					<div class="form-group">
 						<button type="submit" class="btn" value="Submit">Submit</button>
@@ -66,5 +66,4 @@
 				</form>
 
 	</fieldset>
-</div>
 

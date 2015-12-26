@@ -1,2 +1,2 @@
 
-<h3 style = "clear: left;">Character Name: </h3>
+<legend> Character Page: </legend>

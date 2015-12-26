@@ -4,11 +4,6 @@ CREATE TABLE UserAuthInfo (
 	Password 	VARCHAR(32) NOT NULL,
 	PRIMARY KEY (Username));
 
-CREATE TABLE User (
-	Username VARCHAR(16) NOT NULL references UserAuthInfo(Username),
-	AvatarPath VARCHAR(128) NOT NULL,
-	PRIMARY KEY(Username)); 
-
 CREATE TABLE PointsSystem (
 
 	Score                 integer NOT NULL,
@@ -41,6 +36,7 @@ CREATE TABLE Character	(
 	Hips             VARCHAR(20),
 	BodyType         VARCHAR(20),
 	Personality      VARCHAR(20),
+	Description		 VARCHAR(300),
 	AvatarPath		 VARCHAR(128),
 	AvatarThumbPath  VARCHAR(128),
 	PRIMARY KEY(CharacterID));

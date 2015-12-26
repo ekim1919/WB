@@ -4,11 +4,8 @@
 	border:solid pink 2px;
 }
 
-#nav a, #nav a:visited {
-	display:inline;
-}
-
-#nav a span {
+nav
+# a span {
 	display: inline;
 }
 
@@ -17,31 +14,36 @@ span + span {
 }
 
 
-.waifu img {
+#waifu img {
 	float:right;
 }
 
-.waifu table {
+.waifuinfo table {
 	border-collapse: collapse;
-	float:left;
-	width:30%;
+	width:100%;
 }
 
-.waifu th, td {
+.waifuinfo th, td {
 	text-align: left;
 	padding: 8px;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
 
-.waifu th {
+.waifuinfo th {
     background-color: #FF69B4;
     color: white;
 }
 
-.waifuinfo div {
-	display: block;
+.waifuinfo {
+	float:left;
+	width: 50%;
 }
+
+.waifudescrip {
+	border:solid pink 2px;
+}
+
 
 
 

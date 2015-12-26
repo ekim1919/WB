@@ -12,7 +12,7 @@ class RenderList extends Renderable {
  	public function __construct() {
 
  		//If no arguments are passed to the constructor, then give a clean array. Otherwise, start with given array of Renderables. Should add an Exception system at some point.
- 		$this->renderable = (func_num_args() > 0) ? func_get_arg(0) : array();	 		
+ 		$this->renderable = (func_num_args() > 0) ? func_get_args() : array();	 		
  	}
 
  	//Will be Ordered Array.

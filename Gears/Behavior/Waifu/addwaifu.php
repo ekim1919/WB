@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
 require($_SERVER['DOCUMENT_ROOT'] . "/Common/ImageManager/img.php");
 
 
-$post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality');
+$post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality','description');
 $avatar_img = !empty($_FILES) ? $_FILES['files']['tmp_name'] : null;
 
 if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FILES) && ($_FILES["files"]["error"] == UPLOAD_ERR_OK)) {
@@ -20,6 +20,7 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 
 	//Will think of better sanitize flags. Will add validation steps as well. Remember to santize avatar as well.
 
+
 	$SANTIZER->addFilter("firstname",FILTER_SANITIZE_STRING);
 	$SANTIZER->addFilter("lastname",FILTER_SANITIZE_STRING);
 	$SANTIZER->addFilter("haircolor",FILTER_SANITIZE_STRING);
@@ -31,6 +32,7 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 	$SANTIZER->addFilter("waistsize",FILTER_SANITIZE_NUMBER_INT);
 	$SANTIZER->addFilter("bodytype",FILTER_SANITIZE_STRING);
 	$SANTIZER->addFilter("personality",FILTER_SANITIZE_STRING);
+	$SANTIZER->addFilter("description",FILTER_SANITIZE_STRING);	
 
 	$sant_array = $SANTIZER->filter(); 
 
@@ -42,14 +44,14 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 
 	$avatar_name = md5(implode("",$sant_array)); //Hash all values. Assuming values will be "unique enough"
 
-	$avatar_path = $img_mang->makeAvatar($avatar_name); //Very flawed. Need to change naming scheme. 
+	$avatar_path = $img_mang->makeAvatar($avatar_name); 
 
 	$thumb_path = $img_mang->makeThumbNail($avatar_name); //Make the character thumbnail as well.
 
 	$sant_array[] = $avatar_path;
 	$sant_array[] = $thumb_path;
 
-	(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",$sant_array))->execute();
+	(new sqlDBExecute($connection, "INSERT into CHARACTER VALUES(nextval('Character_CharacterID_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",$sant_array))->execute();
 }
 
 ?>
