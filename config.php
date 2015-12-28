@@ -21,6 +21,10 @@ class Config {
 	const THUMB_WIDTH = 64;
 	const THUMB_HEIGHT = 64;
 
+	const USER_IMAGE_ROOT = '/Images/Userimgs/';
+	const USER_MAX_WIDTH = 700;
+	const USER_MAX_HEIGHT = 700;
+
 	/*
 		Database Configuration constants
 	*/

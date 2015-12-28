@@ -20,10 +20,10 @@
 
 		$connection = $DB->connect();
 
-		$login_query = new sqlDBQueryResult($connection, "SELECT UserID FROM USERAUTHINFO WHERE USERNAME = $1", $params=array($username));
+		$login_query = new sqlDBQueryResult($connection, "SELECT UserID FROM USERINFO WHERE USERNAME = $1", $params=array($username));
 		$login_query->query();
 
-		$login_result = $login_query->getRows();
+		$login_result = $login_query->getRow();
 
 		if ($login_result == null) {
 			echo 'No such username was found';

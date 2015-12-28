@@ -1,10 +1,10 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT'] . "/include.php");
-require($_SERVER['DOCUMENT_ROOT'] . "/Common/ImageManager/img.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/include.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/Common/ImageManager/charavatar.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/Common/ImageManager/thumbnail.php");
 
-
-$post_array = array('firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality','description');
+$post_array = ['firstname','lastname','haircolor','eyecolor','height','weight','bustsize','hipsize','waistsize','bodytype','personality','description'];
 $avatar_img = !empty($_FILES) ? $_FILES['files']['tmp_name'] : null;
 
 if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FILES) && ($_FILES["files"]["error"] == UPLOAD_ERR_OK)) {
@@ -40,13 +40,13 @@ if(isset($_POST) && !array_diff($post_array, array_keys($_POST)) && !empty($_FIL
 
 	/*Error handling?*/
 
-	$img_mang = new ImageManager($avatar_img);
+	$char_ava = new CharacterAvatar($avatar_img);
+	$thumb = new ThumbNail($avatar_img);
 
 	$avatar_name = md5(implode("",$sant_array)); //Hash all values. Assuming values will be "unique enough"
 
-	$avatar_path = $img_mang->makeAvatar($avatar_name); 
-
-	$thumb_path = $img_mang->makeThumbNail($avatar_name); //Make the character thumbnail as well.
+	$avatar_path = $char_ava->createImage($avatar_name); 
+	$thumb_path = $thumb->createImage($avatar_name); //Make the character thumbnail as well.
 
 	$sant_array[] = $avatar_path;
 	$sant_array[] = $thumb_path;

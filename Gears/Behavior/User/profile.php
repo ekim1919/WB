@@ -1,22 +1,21 @@
+
+
+
 <?php
+
 require($_SERVER['DOCUMENT_ROOT'] . '/include.php');
 
 if(!$USERSESS->isLoggedIn()) {
 
 	$REDIRECTOR->redirectFromRoot('Public/Auth/login');
 
-} else if (isset($_GET["userid"])) {
-
-   $SANTIZER = new InputSanitizer($_GET);
-
-   $SANTIZER->addFilter("userid",FILTER_SANITIZE_NUMBER_INT);
-   $sant_arr = $SANTIZER->filter();
+} else {
 
    $connection = $DB->connect();
 
    $key_arr = ["Username","About"];
 
-   $user_query = new sqlDBQueryResult($connection, "SELECT " . implode(", ",$key_arr) . " FROM USERINFO WHERE UserID = $1",$params=$sant_arr);
+   $user_query = new sqlDBQueryResult($connection, "SELECT " . implode(", ",$key_arr) . " FROM USERINFO WHERE UserID = $1",$params=[$USERSESS->getUserID()]);
 
    $user_result = $user_query->query();
 
@@ -36,11 +35,11 @@ if(!$USERSESS->isLoggedIn()) {
    		$rendlist->addRenderable(new Text('<div class="aboutuser"' . $user_val_arr["about"] . "</div></div>"));
    		$rendlist->addRenderable(new Text('</div>'));	
 
+         $rendlist->addRenderable(new Text('<a href ="#"> Edit your profile</a>'));
+
    		$RENDENGINE->render($rendlist,$standard=True);
    }
 
-} else {
-	$RENDENGINE->render(new Text("No UserID"),$standard=True);
 }
 
 

@@ -12,8 +12,6 @@ if(isset($_GET['characterid'])) {
 
 	$sant_arr = $SANTIZER->filter();
 
-	//var_dump($sant_arr);
-
 	$connection = $DB->connect();
 
 	$character_query = new sqlDBQueryResult($connection, "SELECT * FROM CHARACTER WHERE characterid = $1 LIMIT 1",$params=$sant_arr);
