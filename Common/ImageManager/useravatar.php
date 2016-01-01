@@ -11,7 +11,7 @@ class UserAvatar extends ImageManager {
 
 		parent::__construct($src_img);
 
-		$this->IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::USER_IMAGE_ROOT;		
+		$this->USER_IMAGE_ROOT = $_SERVER['DOCUMENT_ROOT'] . Config::USER_IMAGE_ROOT;		
 	}
 
 

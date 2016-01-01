@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 The Class in charge of validating images, resizing them, and saving them to the disk.
 Will rethink about the performance and memory costs of such a class.
@@ -63,7 +62,6 @@ abstract class ImageManager {
 
 		$this->gd_release_resource[$this->avatar_img_type]($thumb_img, $img_path);
 	}
-
 
 	protected function validateImg() {
 
